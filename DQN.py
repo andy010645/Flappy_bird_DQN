@@ -117,8 +117,12 @@ class DQN(object):
         # check file exsit
         if os.path.isfile(filepath):
             print("load model param")
-            self.eval_net=torch.load('save.pt',map_location=torch.device('cpu'))
-            self.target_net=torch.load('save.pt',map_location=torch.device('cpu'))
+            if device == 'cpu':
+                self.eval_net=torch.load('save.pt',map_location=torch.device('cpu'))
+                self.target_net=torch.load('save.pt',map_location=torch.device('cpu'))
+            else:
+                self.eval_net=torch.load('save.pt')
+                self.target_net=torch.load('save.pt')
         else:
             print("no model exist")
 
